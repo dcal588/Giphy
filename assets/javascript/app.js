@@ -1,8 +1,8 @@
 
     $("button").on("click", function() {
       var person = $(this).attr("data-person");
-      var queryURL = "http://api.giphy.com/v1/gifs/search?q=" +
-        person + "&api_key=dc6zaTOxFJmzC&limit=10";
+      var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
+        person + "&api_key=25e6b8b7abc14f53a86853319e29c240&limit=10";
 
       $.ajax({
           url: queryURL,
