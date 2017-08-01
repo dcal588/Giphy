@@ -1,20 +1,22 @@
 $ (document).ready( function(){	
 	var topics = ["The Matrix", "Training Day", "Forrest Gump", "Star Trek", "Star Wars"];
-
-  $("#topic-buttons").on("click", function() {
-     var queryURL = "https://api.giphy.com/v1/gifs/random?api_key=dc6zaTOxFJmzC&tag=cats";
+  function displayGifs() {
+  	var topic = $(this).attr("data-name");
+    var queryURL = 'http://api.giphy.com/v1/gifs/search?q='+ encodeURIComponent(topic) +'&api_key=dc6zaTOxFJmzC&limit=10';
+    console.log(queryURL)
     $.ajax({
       url: queryURL,
       method: "GET"
     })
     .done(function(response) {
-      var imageUrl = response.data.image_original_url;
+      var imageUrl = response.data[0].images.fixed_height.url;
       var topicImage = $("<img>");
       topicImage.attr("src", imageUrl);
-      topicImage.attr("alt", "topic image");
+      topicImage.attr("alt", topic + " Image");
       $("#images").prepend(topicImage);
+      console.log(imageUrl);
 		});
-  });
+  }
 
   function createButtons() {
         $("#topicBox").empty();
@@ -30,8 +32,8 @@ $ (document).ready( function(){
         event.preventDefault();
         var topic = $("#topic-input").val();
         topics.push(topic);
-        // Calling renderButtons which handles the processing of our movie array
         createButtons();
       });
+  $(document).on("click", ".topic", displayGifs);
   createButtons();
 });
