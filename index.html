@@ -5,9 +5,13 @@
   <title>GIPHY Search</title>
 </head>
 <body>
-  <button id="topic-button">magical cat button</button>
-  <div id="images">
-  </div>
+	<form id="topic-form">
+    <label for="topic-input">Add a New Topic</label>
+    <input type="text" id="topic-input"><br>
+    <input id="add-topic" type="submit" value="Add a New Topic">
+  </form>
+	<div id="topicBox"></div>
+  <div id="images"></div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="assets/javascript/app.js"></script>
 </body>
