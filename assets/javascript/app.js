@@ -10,14 +10,15 @@ var topics = ["The Matrix", "Training Day", "Forrest Gump", "Star Trek", "Star W
           url: queryURL,
           method: "GET"
         }).done(function(response) {
-          var topicBox = $("<div class='topics'>");
+          var topicsBox = $("<div class='topics'>");
           var ratingBox = response.rating;
           var paragraphRating = $("<p>").text("Rating: " + ratingBox);
           topicsBox.append(paragraphRating);
-          var gifImageUrl = response.URL;
+          var gifImageUrl = response.url;
           var gifImage = $("<img>").attr("src", gifImageUrl);
           topicsBox.append(gifImage);
-          $("#gifTopicsViewer").prepend(topicBox);
+          $("#gifsViewer").prepend(topicsBox);
+          console.log(response.data.rating);
         });
       }
 
@@ -28,7 +29,7 @@ var topics = ["The Matrix", "Training Day", "Forrest Gump", "Star Trek", "Star W
           a.addClass("topics");
           a.attr("data-name", topics[i]);
           a.text(topics[i]);
-          $("#gifTopicsViewer").append(a);
+          $("#gifsViewer").append(a);
         }
       }
       $("#add-topics").on("click", function(event) {
