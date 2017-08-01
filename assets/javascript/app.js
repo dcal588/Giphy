@@ -14,16 +14,16 @@ $ (document).ready( function(){
       	var imageUrl = response.data[i].images.fixed_height.url;
       	var imageUrlStill = response.data[i].images.fixed_height_still.url;
       	var ratingResponse = response.data[i].rating;
-      	var rating = $("<p>"+ratingResponse+"<p>");
       	var topicImage = $("<img>");
+      	var rating = $("<p> Rating: "+ratingResponse + "</p>");
       	topicImage.attr("id", "gif");
       	topicImage.attr("src", imageUrlStill);
      		topicImage.attr("data-still", imageUrlStill);
       	topicImage.attr("data-animate", imageUrl);
       	topicImage.attr("data-state", "still");
       	topicImage.attr("alt", topic + " Image");
-      	$("#images").prepend(topicImage);
-      	$("#images").prepend(rating);
+      	$("#images").append(rating);
+      	$("#images").append(topicImage);
     	}
 		});
   }
