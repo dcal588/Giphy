@@ -9,12 +9,15 @@ $ (document).ready( function(){
       method: "GET"
     })
     .done(function(response) {
-      var imageUrl = response.data[0].images.fixed_height.url;
-      var topicImage = $("<img>");
-      topicImage.attr("src", imageUrl);
-      topicImage.attr("alt", topic + " Image");
-      $("#images").prepend(topicImage);
-      console.log(imageUrl);
+    	$("#images").empty();
+    	for(i=0;i<10;i++) {
+      	var imageUrl = response.data[i].images.fixed_height.url;
+      	var topicImage = $("<img>");
+      	topicImage.attr("src", imageUrl);
+      	topicImage.attr("alt", topic + " Image");
+      	$("#images").prepend(topicImage);
+      	console.log(imageUrl);
+    	}
 		});
   }
 
