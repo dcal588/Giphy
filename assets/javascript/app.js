@@ -1,45 +1,26 @@
 $ (document).ready( function(){	
 var topics = ["The Matrix", "Training Day", "Forrest Gump", "Star Trek", "Star Wars"];
-      
-    function displayer() {
-        var topics = $(this).attr("data-name");
-        var queryURL = "http://api.giphy.com/v1/gifs/search?q=" +
-        topics + "&api_key=25e6b8b7abc14f53a86853319e29c240&limit=10";
-        
-        $.ajax({
-          url: queryURL,
-          method: "GET"
-        }).done(function(response) {
-          var topicsBox = $("<div class='topics'>");
-          var ratingBox = response.rating;
-          var paragraphRating = $("<p>").text("Rating: " + ratingBox);
-          topicsBox.append(paragraphRating);
-          var gifImageUrl = response.url;
-          var gifImage = $("<img>").attr("src", gifImageUrl);
-          topicsBox.append(gifImage);
-          $("#gifsViewer").prepend(topicsBox);
-          console.log(response.data.rating);
-        });
-      }
 
-      function createButtons() {
-        $("#buttons-view").empty();
-        for (var i = 0; i < topics.length; i++) {
-          var a = $("<button>");
-          a.addClass("topics");
-          a.attr("data-name", topics[i]);
-          a.text(topics[i]);
-          $("#gifsViewer").append(a);
-        }
-      }
-      $("#add-topics").on("click", function(event) {
-        event.preventDefault();
-        var topics = $("#topics-input").val().trim();
-        topics.push(topics);
 
-        createButtons();
-      });
-      $(document).on("click", ".topics", displayer);
-      // Calling the renderButtons function to display the intial buttons
-      createButtons();
+    $("#topic-button").on("click", function() {
+      // Storing our giphy API URL for a random cat image
+      var queryURL = "https://api.giphy.com/v1/gifs/random?api_key=dc6zaTOxFJmzC&tag=cats";
+      // Perfoming an AJAX GET request to our queryURL
+      $.ajax({
+        url: queryURL,
+        method: "GET"
+      })
+      // After the data from the AJAX request comes back
+      .done(function(response) {
+        // Saving the image_original_url property
+        var imageUrl = response.data.image_original_url;
+        // Creating and storing an image tag
+        var topicImage = $("<img>");
+        // Setting the catImage src attribute to imageUrl
+        topicImage.attr("src", imageUrl);
+        topicImage.attr("alt", "cat image");
+        // Prepending the catImage to the images div
+        $("#images").prepend(topicImage);
 });
+    });
+  });
