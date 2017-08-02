@@ -1,5 +1,6 @@
 $ (document).ready( function(){	
 	var topics = ["The Matrix", "Training Day", "Forrest Gump", "Star Trek", "Star Wars"];
+
 	
   function displayGifs() {
   	var topic = $(this).attr("data-name");
@@ -10,20 +11,24 @@ $ (document).ready( function(){
     })
     .done(function(response) {
     	$("#images").empty();
-    	for(i=0;i<10;i++) {
+    	for(var i=0; i<10; i++) {
+
       	var imageUrl = response.data[i].images.fixed_height.url;
       	var imageUrlStill = response.data[i].images.fixed_height_still.url;
       	var ratingResponse = response.data[i].rating;
+        var gifBox = $("<div>");
       	var topicImage = $("<img>");
-      	var rating = $("<p> Rating: "+ratingResponse + "</p>");
+      	var rating = $("<p> Rating: "+ ratingResponse + "</p>");
+        gifBox.attr("class", "gifs");
       	topicImage.attr("id", "gif");
       	topicImage.attr("src", imageUrlStill);
      		topicImage.attr("data-still", imageUrlStill);
       	topicImage.attr("data-animate", imageUrl);
       	topicImage.attr("data-state", "still");
       	topicImage.attr("alt", topic + " Image");
-      	$("#images").append(rating);
-      	$("#images").append(topicImage);
+        $("#images").append(gifBox);
+      	gifBox.append(rating);
+      	gifBox.append(topicImage);
     	}
 		});
   }
